@@ -1,0 +1,24 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ controller_name }}{% endblock %}
+
+{% block body %}
+    {%for message in app.session.flashBag.get("deleted")%}
+        <div class="alert alert-success">{{message}}</div>
+    {%endfor%}
+    {%for message in app.session.flashBag.get("success")%}
+        <div class="alert alert-success">{{message}}</div>
+    {%endfor%}
+    {%for message in app.session.flashBag.get("error")%}
+        <div class="alert alert-danger">{{message}}</div>
+    {%endfor%}
+    {% for etudiant in etudiants %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{ etudiant.prenom }} {{ etudiant.nom }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted"></h6>
+            <a href="{{path("delete_etudiants")}}" class="card-link">delete</a>
+        </div>
+    </div>
+    {% endfor%}
+{% endblock %}
