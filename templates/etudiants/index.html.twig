@@ -9,16 +9,34 @@
     {%for message in app.session.flashBag.get("success")%}
         <div class="alert alert-success">{{message}}</div>
     {%endfor%}
+    {%for message in app.session.flashBag.get("edited")%}
+        <div class="alert alert-success">{{message}}</div>
+    {%endfor%}
     {%for message in app.session.flashBag.get("error")%}
         <div class="alert alert-danger">{{message}}</div>
     {%endfor%}
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Firstname</th>
+                <th scope="col">Name</th>
+                <th scope="col">Section</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
     {% for etudiant in etudiants %}
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">{{ etudiant.prenom }} {{ etudiant.nom }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted"></h6>
-            <a href="{{path("delete_etudiants",{id:etudiant.id})}}" class="card-link">delete</a>
-        </div>
-    </div>
+    <tr {% if loop.index is odd %} class="table-primary" {% else %} class="table-secondary" {%endif%}>
+                <th >{{ etudiant.prenom }}</th>
+                <td>{{ etudiant.nom }}</td>
+                <td>{% if etudiant.getSection()%}{{etudiant.getSection().__toString()}}
+                    {% else %} Etudiant non encore effectué à une section
+                    {%endif%}</td>
+                <td><a href="{{ path('edit_etudiant', {id:etudiant.id})}}" class="card-link">edit</a></td>
+                <td><a href="{{path("delete_etudiant",{id:etudiant.id})}}" class="card-link">delete</a></td>
+    </tr>
     {% endfor%}
+            </tbody>
+        </table>
 {% endblock %}
