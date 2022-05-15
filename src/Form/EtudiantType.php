@@ -17,7 +17,7 @@ class EtudiantType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('section')
-            ->add('Add_student', SubmitType::class)
+            ->add('Submit', SubmitType::class)
             ->getForm();
     }
 

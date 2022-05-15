@@ -2,6 +2,10 @@
 
 {% block title %}{{ controller_name }}{% endblock %}
 
+{% block stylesheets%}
+    <link rel="stylesheet" href="{{ asset('asset/style.css') }}">
+{%endblock%}
+
 {% block body %}
     {%for message in app.session.flashBag.get("deleted")%}
         <div class="alert alert-success">{{message}}</div>
@@ -28,7 +32,7 @@
             <tbody>
     {% for etudiant in etudiants %}
     <tr {% if loop.index is odd %} class="table-primary" {% else %} class="table-secondary" {%endif%}>
-                <th >{{ etudiant.prenom }}</th>
+                <td >{{ etudiant.prenom }}</td>
                 <td>{{ etudiant.nom }}</td>
                 <td>{% if etudiant.getSection()%}{{etudiant.getSection().__toString()}}
                     {% else %} Etudiant non encore effectué à une section
@@ -40,3 +44,7 @@
             </tbody>
         </table>
 {% endblock %}
+
+{% block javascripts%}
+    <script src="{{ asset('asset/js.js') }}"></script>
+{% endblock%}
